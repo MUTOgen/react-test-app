@@ -1,0 +1,43 @@
+.add-form {
+    padding-bottom: 15px;
+}
+
+.table {
+    width:50%;
+}
+.table .filter-container {
+    float:right;
+    width:30%;
+}
+.table .filter-container input {
+    width:100%;
+}
+.table table {
+    width:100%;
+}
+.table .pagination {
+    text-align: right;
+}
+.table .pagination a {
+    text-decoration: none;
+    margin-right:5px;
+}
+.table .pagination a:hover {
+    text-decoration: underline;
+}
+.table .pagination a.current-page {
+    font-weight: bold;
+}
+
+.table table td {
+    padding:7px;
+    border:1px solid #ccc;
+}
+
+.table table td.id-cell {
+    width:10%
+}
+
+.table table td.login-cell, .table table td.password-cell {
+    width:35%;
+}

@@ -1,34 +1,44 @@
-.App {
+.app {
   text-align: center;
 }
 
-.App-logo {
+.app-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
 }
 
-.App-header {
+.app-header {
   background-color: #222;
   height: 80px;
   padding: 20px;
   color: white;
 }
 
-.App-title {
+.app-title {
   font-size: 1.5em;
 }
 
-.App-intro {
+.app-intro {
   font-size: large;
 }
 
 .menu {
   display: flex;
   list-style-type: none;
+  padding:10px 40px;
+}
+
+.app-content {
+  text-align: left;
+  padding: 10px 40px;
 }
 
 .menu li {
-  padding:0 15px;
+  padding-right:20px;
+}
+
+.menu li a.active {
+  font-weight: bold;
 }
 
 @keyframes App-logo-spin {

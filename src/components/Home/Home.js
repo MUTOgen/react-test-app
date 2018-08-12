@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 
 export default class Home extends Component {
+    componentWillMount(){
+        
+    }
     render() {
         return (
             <div>
-               Login 
+               Hello world! This is Homepage
             </div>
         );
     }
