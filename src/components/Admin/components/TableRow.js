@@ -92,7 +92,7 @@ export default class TableRow extends Component {
                     { !isEdit ? login : <input type="text" name="login" className="login" onChange={this.loginChanged} defaultValue={login} /> }
                 </td>
                 <td className="password-cell">
-                    { !isEdit ? '*****' : <input type="password" name="password" className="password" onChange={this.passwordChanged} /> }
+                    { !isEdit ? '*****' : <input type="password" name="password" className="password" onChange={this.passwordChanged} placeholder="Leave empty to save old password" /> }
                 </td>
                 { !isEdit ? this.renderCommonControls() : this.renderEditContols() }
             </tr>
