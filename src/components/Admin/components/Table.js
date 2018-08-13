@@ -7,7 +7,7 @@ import Pagination from './Pagination';
 
 class Table extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             users: [],
             filterUsers: [],
@@ -61,7 +61,7 @@ class Table extends Component {
     }
 
     componentDidMount(){
-        axios.get('http://aabramoff.ru/api/list.php').then(response => {
+        axios.get('https://us-club.pw/api/list.php').then(response => {
             let data = response.data
             if('error' in data){
                 alert(data.error)
@@ -99,7 +99,7 @@ class Table extends Component {
                                     {rows}
                             </tbody>
                         </table>
-                        { filterUsers.length > perPage && <Pagination page={page} perPage={perPage} total={filterUsers.length} onChangePage={this.onChangePage} /> }
+                        <Pagination page={page} perPage={perPage} total={filterUsers.length} pages={Math.ceil(filterUsers.length/perPage)} onChangePage={this.onChangePage} />
                     </div> : 
                     <p>Loading data...</p> 
                }

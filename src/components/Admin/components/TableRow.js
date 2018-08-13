@@ -48,7 +48,7 @@ export default class TableRow extends Component {
             alert('Fill the Login')
             return
         }
-        axios.get(`http://aabramoff.ru/api/edit.php?id=${id}&login=${login}&password=${password}`).then(response => {
+        axios.get(`https://us-club.pw/api/edit.php?id=${id}&login=${login}&password=${password}`).then(response => {
             let data = response.data
             if('error' in data){
                 alert(data.error)
@@ -62,7 +62,7 @@ export default class TableRow extends Component {
         e.preventDefault()
         let confirm = window.confirm('Are you sure?')
         if(confirm){
-            axios.get(`http://aabramoff.ru/api/delete.php?id=${this.state.id}`).then(response => {
+            axios.get(`https://us-club.pw/api/delete.php?id=${this.state.id}`).then(response => {
                 let data = response.data
                 if('error' in data){
                     alert(data.error)

@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import Validator from '../../helpers/Validator'
 
 import './Login.css';
 
 class Login extends Component {
-    isEmail = (email) => {
-        const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return regex.test(email);
-    }
-
     validate(login, password){
         if(login.trim() === '' || password.trim() === ''){
             alert('Fill the form. All fields are required')
@@ -22,12 +18,17 @@ class Login extends Component {
         let form = e.target
         let login = form.elements[0].value
         let password = form.elements[1].value
-        if(!this.isEmail(login)){
+        let repassword = form.elements[2].value
+        if(!Validator.isEmail(login)){
             alert('Email is not valid')
             return false
         }
+        if(password !== repassword){
+            alert('Passwords are not matched')
+            return
+        }
         if(this.validate(login, password)){
-            axios.get(`http://aabramoff.ru/api/add.php?login=${login}&password=${password}`).then(response => {
+            axios.get(`https://us-club.pw/api/add.php?login=${login}&password=${password}`).then(response => {
                 let data = response.data
                 if(data.status === 'error'){
                     alert(data.error);
@@ -45,7 +46,7 @@ class Login extends Component {
         let password = e.target.elements[1].value
 
         if(this.validate(login, password)){
-            axios.get(`http://aabramoff.ru/api/login.php?login=${login}&password=${password}`).then(response => {
+            axios.get(`https://us-club.pw/api/login.php?login=${login}&password=${password}`).then(response => {
                 let data = response.data
                 if(data.status === 'error'){
                     alert(data.error)
@@ -72,6 +73,7 @@ class Login extends Component {
                 <form onSubmit={this.doRegister}>
                     <p><input type="text" name="login" className="login" placeholder="Enter email" /></p>
                     <p><input type="password" name="password" className="password" placeholder="Enter password" /></p>
+                    <p><input type="password" name="re-password" className="re-password" placeholder="Repeat password" /></p>
                     <p><button type="submit">Enter</button></p>
                 </form>
             </div>

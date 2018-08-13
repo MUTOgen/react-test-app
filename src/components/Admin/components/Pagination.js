@@ -8,10 +8,8 @@ class Pagination extends Component {
     }
 
     renderPageLinks = () => {
-        const {perPage, total, page} = this.props
-        let pages = Math.ceil(total/perPage)
+        const {page, pages} = this.props
         let array_pages = Array.from({length: pages}, (v, k) => 1+k)
-
         if(pages < page) {
             this.props.onChangePage(pages)
         }
@@ -33,6 +31,7 @@ class Pagination extends Component {
 }
 
 Pagination.propTypes = {
+    pages: propTypes.number,
     page: propTypes.number.isRequired,
     perPage: propTypes.number.isRequired,
     total: propTypes.number.isRequired,
