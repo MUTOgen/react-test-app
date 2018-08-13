@@ -43,12 +43,13 @@ export default class TableRow extends Component {
     handleSaveClick = (e) => {
         e.preventDefault()
         let {login, password, id} = this.state
+        const token = window.localStorage.getItem('token')
 
         if(login.trim() === ''){
             alert('Fill the Login')
             return
         }
-        axios.get(`https://us-club.pw/api/edit.php?id=${id}&login=${login}&password=${password}`).then(response => {
+        axios.get(`https://us-club.pw/api/edit.php?id=${id}&login=${login}&password=${password}&token=${token}`).then(response => {
             let data = response.data
             if('error' in data){
                 alert(data.error)
@@ -62,7 +63,8 @@ export default class TableRow extends Component {
         e.preventDefault()
         let confirm = window.confirm('Are you sure?')
         if(confirm){
-            axios.get(`https://us-club.pw/api/delete.php?id=${this.state.id}`).then(response => {
+            const token = window.localStorage.getItem('token')
+            axios.get(`https://us-club.pw/api/delete.php?id=${this.state.id}&token=${token}`).then(response => {
                 let data = response.data
                 if('error' in data){
                     alert(data.error)

@@ -35,7 +35,7 @@ class Login extends Component {
                 }
                 if(data.status === 'ok'){
                     form.reset()
-                    alert('Success! Now you can login');
+                    alert('Success! Now you can login')
                 }
             });
         }
@@ -54,6 +54,7 @@ class Login extends Component {
                 }
                 if(data.status === 'ok'){
                     window.localStorage.setItem('login',login)
+                    window.localStorage.setItem('token',data.item.token)
                     this.props.history.push('/')
                 }
             });

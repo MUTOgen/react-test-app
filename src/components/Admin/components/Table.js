@@ -52,7 +52,7 @@ class Table extends Component {
                 }
             }
         }
-        this.setState({filter: filter, filterUsers: filtered, page: 1});
+        this.setState({filter: filter, filterUsers: filtered, page: 1})
     }
 
     onAdd = (item) => {
@@ -61,13 +61,14 @@ class Table extends Component {
     }
 
     componentDidMount(){
-        axios.get('https://us-club.pw/api/list.php').then(response => {
+        const token = window.localStorage.getItem('token')
+        axios.get(`https://us-club.pw/api/list.php?token=${token}`).then(response => {
             let data = response.data
             if('error' in data){
                 alert(data.error)
                 return
             }
-            this.setState({users: data, filterUsers: data});
+            this.setState({users: data, filterUsers: data})
         })
     }
 
