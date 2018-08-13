@@ -42,7 +42,7 @@ class AddForm extends Component {
     render() {
         return (
             <div className="add-form">
-                <h2>Add form</h2>
+                <h2>Add user</h2>
                 <form onSubmit={this.doAdd}>
                     <p><input type="text" name="login" className="login" placeholder="Enter new email" /></p>
                     <p><input type="password" name="password" className="password" placeholder="Enter new password" /></p>
