@@ -74,7 +74,7 @@ class Login extends Component {
                     <p><input type="text" name="login" className="login" placeholder="Enter email" /></p>
                     <p><input type="password" name="password" className="password" placeholder="Enter password" /></p>
                     <p><input type="password" name="re-password" className="re-password" placeholder="Repeat password" /></p>
-                    <p><button type="submit">Enter</button></p>
+                    <p><button type="submit">Register</button></p>
                 </form>
             </div>
         );
