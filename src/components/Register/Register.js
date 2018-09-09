@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
-import propTypes from 'prop-types'
-import { withRouter, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import axios from 'axios'
-import Auth from '../../helpers/Auth'
+import Validator from '../../helpers/Validator'
 
-import './Login.css'
+import './Register.css'
 
-class Login extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      login: null,
-      password: null,
-    }
+class Register extends Component {
+  state = {
+    login: null,
+    password: null,
+    repassword: null,
   }
 
   changeLogin = e => {
@@ -21,6 +18,9 @@ class Login extends Component {
   changePassword = e => {
     this.setState({ password: e.target.value })
   }
+  changeRePassword = e => {
+    this.setState({ repassword: e.target.value })
+  }
   validate(login, password) {
     if (login.trim() === '' || password.trim() === '') {
       alert('Fill the form. All fields are required')
@@ -28,25 +28,31 @@ class Login extends Component {
     }
     return true
   }
-  doAuth = e => {
+  doRegister = e => {
     e.preventDefault()
-    let { login, password } = this.state
-
+    let { login, password, repassword } = this.state
+    let form = e.target
+    if (!Validator.isEmail(login)) {
+      alert('Email is not valid')
+      return false
+    }
+    if (password !== repassword) {
+      alert('Passwords are not matched')
+      return
+    }
     if (this.validate(login, password)) {
       axios
         .get(
-          `https://us-club.pw/api/login.php?login=${login}&password=${password}`
+          `https://us-club.pw/api/add.php?login=${login}&password=${password}`
         )
         .then(response => {
           let data = response.data
           if (data.status === 'error') {
             alert(data.error)
-            return
           }
           if (data.status === 'ok') {
-            Auth.putUser(login, data.item.token)
-            this.props.onLogin(login, data.item.token)
-            this.props.history.push('/')
+            form.reset()
+            alert('Success! Now you can login')
           }
         })
     }
@@ -54,9 +60,9 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login-form">
-        <h2>Login</h2>
-        <form onSubmit={this.doAuth}>
+      <div className="register-form">
+        <h2>Registration</h2>
+        <form onSubmit={this.doRegister}>
           <p>
             <input
               type="text"
@@ -76,12 +82,21 @@ class Login extends Component {
             />
           </p>
           <p>
-            <button type="submit">Enter</button>
+            <input
+              type="password"
+              name="re-password"
+              className="re-password"
+              placeholder="Repeat password"
+              onChange={this.changeRePassword}
+            />
+          </p>
+          <p>
+            <button type="submit">Register</button>
           </p>
         </form>
         <p>
-          <NavLink to="/register" activeClassName="active">
-            Register
+          <NavLink to="/login" activeClassName="active">
+            Login
           </NavLink>
         </p>
       </div>
@@ -89,8 +104,4 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
-  onLogin: propTypes.func.isRequired,
-}
-
-export default withRouter(Login)
+export default Register
